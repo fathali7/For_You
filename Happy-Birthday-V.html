@@ -1,0 +1,2139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For You 🌸</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --pink:#ef8fbd;
+    --pink-dark:#cf6398;
+    --purple:#9d84df;
+    --blue:#8eb7e8;
+    --cream:#fff9f5;
+    --text:#624a62;
+    --white:rgba(255,255,255,.86);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Poppins",sans-serif;
+    background:#fff7fb;
+    color:var(--text);
+    overflow:hidden;
+}
+
+button{
+    font-family:inherit;
+}
+
+.screen{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    opacity:0;
+    visibility:hidden;
+    transform:scale(1.03);
+    transition:
+        opacity .8s ease,
+        transform .8s ease,
+        visibility .8s;
+}
+
+.screen.active{
+    opacity:1;
+    visibility:visible;
+    transform:scale(1);
+}
+
+/* ===================================================
+   COMMON BACKGROUND
+=================================================== */
+
+.background{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 10% 15%,rgba(255,169,207,.38),transparent 22%),
+        radial-gradient(circle at 85% 20%,rgba(176,148,255,.28),transparent 23%),
+        radial-gradient(circle at 70% 85%,rgba(155,204,255,.25),transparent 24%),
+        linear-gradient(135deg,#fff7fb,#faf6ff,#f2f9ff);
+}
+
+.glow{
+    position:absolute;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    background:rgba(255,255,255,.48);
+    filter:blur(5px);
+    animation:glowMove 8s ease-in-out infinite alternate;
+}
+
+.glow.one{
+    top:-100px;
+    left:-100px;
+}
+
+.glow.two{
+    bottom:-140px;
+    right:-100px;
+    animation-delay:2s;
+}
+
+@keyframes glowMove{
+    to{
+        transform:translate(70px,30px) scale(1.12);
+    }
+}
+
+.memory-gallery{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin:20px 0 30px;
+}
+
+.memory-gallery img{
+    width:140px;
+    height:170px;
+    object-fit:cover;
+    border:6px solid white;
+    border-radius:14px;
+    box-shadow:0 8px 20px rgba(80,60,80,.15);
+    transition:.4s ease;
+}
+
+.memory-gallery img:nth-child(1){
+    transform:rotate(-5deg);
+}
+
+.memory-gallery img:nth-child(2){
+    transform:translateY(-8px);
+}
+
+.memory-gallery img:nth-child(3){
+    transform:rotate(5deg);
+}
+
+.memory-gallery img:hover{
+    transform:translateY(-10px) scale(1.05) rotate(0);
+}
+
+/* ===================================================
+   PETALS
+=================================================== */
+
+.petal{
+    position:absolute;
+    top:-50px;
+    width:13px;
+    height:20px;
+    border-radius:70% 30% 70% 30%;
+    opacity:.6;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    from{
+        transform:translateY(-50px) rotate(0deg);
+    }
+
+    to{
+        transform:translateY(110vh) rotate(650deg);
+    }
+}
+
+/* ===================================================
+   BUTTON
+=================================================== */
+
+.primary-btn{
+    border:0;
+    padding:16px 31px;
+    border-radius:999px;
+    color:white;
+    font-size:15px;
+    font-weight:600;
+    letter-spacing:.5px;
+    cursor:pointer;
+
+    background:
+        linear-gradient(135deg,var(--pink),var(--purple));
+
+    box-shadow:
+        0 12px 30px rgba(191,102,165,.25);
+
+    transition:.3s ease;
+}
+
+.primary-btn:hover{
+    transform:translateY(-4px) scale(1.025);
+    box-shadow:
+        0 18px 35px rgba(191,102,165,.35);
+}
+
+.secondary-btn{
+    background:rgba(255,255,255,.6);
+    color:var(--text);
+    border:1px solid rgba(255,255,255,.8);
+    backdrop-filter:blur(12px);
+}
+
+/* ===================================================
+   SCREEN 1 — OPENING
+=================================================== */
+
+#opening{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.opening-card{
+    position:relative;
+    z-index:10;
+    width:min(850px,92%);
+    padding:60px 30px;
+    text-align:center;
+
+    background:rgba(255,255,255,.54);
+    border:1px solid rgba(255,255,255,.8);
+    border-radius:40px;
+
+    backdrop-filter:blur(20px);
+
+    box-shadow:
+        0 25px 80px rgba(101,74,104,.11);
+}
+
+.tiny-title{
+    font-size:12px;
+    letter-spacing:5px;
+    text-transform:uppercase;
+    color:#a277a2;
+    margin-bottom:18px;
+}
+
+.opening-card h1{
+    font-family:"Cormorant Garamond",serif;
+    font-size:clamp(65px,12vw,125px);
+    font-weight:600;
+    line-height:.85;
+
+    background:
+        linear-gradient(
+            90deg,
+            #e56fa5,
+            #a084df,
+            #77a8df,
+            #e56fa5
+        );
+
+    background-size:300%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    animation:gradient 7s linear infinite;
+}
+
+@keyframes gradient{
+    to{
+        background-position:300%;
+    }
+}
+
+.opening-card .intro{
+    max-width:590px;
+    margin:25px auto 30px;
+    line-height:1.9;
+    font-size:16px;
+    color:#796279;
+}
+
+.enter-btn{
+    position:relative;
+    overflow:hidden;
+}
+
+.enter-btn::after{
+    content:"";
+    position:absolute;
+    width:40px;
+    height:120px;
+    background:rgba(255,255,255,.35);
+    transform:rotate(25deg);
+    left:-80px;
+    top:-20px;
+    transition:.7s;
+}
+
+.enter-btn:hover::after{
+    left:120%;
+}
+
+.vinca-symbol{
+    font-size:44px;
+    margin-bottom:20px;
+    animation:bloom 3s ease-in-out infinite;
+}
+
+@keyframes bloom{
+    0%,100%{
+        transform:scale(1) rotate(-3deg);
+    }
+    50%{
+        transform:scale(1.08) rotate(3deg);
+    }
+}
+
+/* ===================================================
+   SCREEN 2 — GARDEN
+=================================================== */
+
+#garden{
+    overflow-y:auto;
+}
+
+.garden-content{
+    position:relative;
+    z-index:10;
+    width:min(1100px,92%);
+    margin:auto;
+    padding:60px 0 120px;
+}
+
+.garden-heading{
+    text-align:center;
+}
+
+.garden-heading .mini{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:4px;
+    color:#9d7b9f;
+}
+
+.garden-heading h2{
+    margin-top:8px;
+    font-family:"Cormorant Garamond",serif;
+    font-size:clamp(45px,8vw,76px);
+}
+
+.garden-heading p{
+    margin:12px auto;
+    max-width:600px;
+    color:#796579;
+    line-height:1.8;
+}
+
+.flower-grid{
+    margin-top:55px;
+
+    display:grid;
+    grid-template-columns:
+        repeat(5,minmax(0,1fr));
+
+    gap:24px;
+    align-items:end;
+}
+
+.flower-card{
+    position:relative;
+    min-height:220px;
+    padding:18px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    align-items:center;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.52);
+    border:1px solid rgba(255,255,255,.8);
+
+    backdrop-filter:blur(15px);
+
+    cursor:pointer;
+    transition:.4s ease;
+}
+
+.flower-card:hover{
+    transform:translateY(-12px);
+    box-shadow:
+        0 18px 35px rgba(105,77,109,.13);
+}
+
+.flower{
+    position:relative;
+    width:110px;
+    height:110px;
+    margin-bottom:15px;
+}
+
+.flower .petal-shape{
+    position:absolute;
+    width:50px;
+    height:74px;
+    border-radius:50% 50% 45% 45%;
+    left:30px;
+    top:18px;
+    transform-origin:50% 75%;
+}
+
+.flower .p1{
+    transform:rotate(0deg);
+}
+
+.flower .p2{
+    transform:rotate(72deg);
+}
+
+.flower .p3{
+    transform:rotate(144deg);
+}
+
+.flower .p4{
+    transform:rotate(216deg);
+}
+
+.flower .p5{
+    transform:rotate(288deg);
+}
+
+.flower .center{
+    position:absolute;
+    width:27px;
+    height:27px;
+    border-radius:50%;
+    background:#ffd75c;
+    left:41px;
+    top:42px;
+    box-shadow:0 0 15px rgba(255,215,92,.7);
+    z-index:3;
+}
+
+.flower-card:nth-child(1) .petal-shape{
+    background:#ff87b8;
+}
+
+.flower-card:nth-child(2) .petal-shape{
+    background:#a88be7;
+}
+
+.flower-card:nth-child(3) .petal-shape{
+    background:#ffb3c7;
+}
+
+.flower-card:nth-child(4) .petal-shape{
+    background:#91bdf0;
+}
+
+.flower-card:nth-child(5) .petal-shape{
+    background:#e783a7;
+}
+
+.flower-card h3{
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+.flower-card span{
+    font-size:12px;
+    color:#927f91;
+}
+
+.garden-message{
+    margin:50px auto 0;
+    max-width:650px;
+    padding:25px;
+    text-align:center;
+
+    border-radius:25px;
+
+    background:rgba(255,255,255,.65);
+    backdrop-filter:blur(15px);
+
+    display:none;
+}
+
+.garden-message.show{
+    display:block;
+    animation:messageIn .5s ease;
+}
+
+@keyframes messageIn{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+.next-area{
+    text-align:center;
+    margin-top:45px;
+}
+
+/* ===================================================
+   SCREEN 3 — LETTER
+=================================================== */
+
+#letter{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:30px;
+}
+
+.letter-wrapper{
+    position:relative;
+    width:min(800px,100%);
+}
+
+.envelope{
+    position:relative;
+    width:100%;
+    height:430px;
+
+    background:#f8ddea;
+    border-radius:18px;
+
+    box-shadow:
+        0 30px 70px rgba(118,76,106,.18);
+
+    cursor:pointer;
+
+    transition:1s ease;
+}
+
+.envelope-front{
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f7cfe0,
+            #eed8f3
+        );
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            100% 100%,
+            0 100%
+        );
+
+    border-radius:18px;
+}
+
+.envelope::before,
+.envelope::after{
+    content:"";
+    position:absolute;
+    width:55%;
+    height:100%;
+    bottom:0;
+    background:#efd0e3;
+}
+
+.envelope::before{
+    left:0;
+    clip-path:polygon(0 0,100% 100%,0 100%);
+}
+
+.envelope::after{
+    right:0;
+    clip-path:polygon(100% 0,100% 100%,0 100%);
+}
+
+.flap{
+    position:absolute;
+    z-index:5;
+    top:0;
+    left:0;
+    width:100%;
+    height:58%;
+
+    background:#f5cee2;
+
+    clip-path:polygon(0 0,100% 0,50% 100%);
+
+    transform-origin:top;
+
+    transition:1s ease;
+}
+
+.letter-paper{
+    position:absolute;
+    z-index:3;
+    left:8%;
+    width:84%;
+    height:88%;
+    bottom:4%;
+
+    padding:35px 38px;
+
+    background:#fffdf9;
+
+    border-radius:10px;
+
+    box-shadow:
+        0 15px 40px rgba(86,58,77,.12);
+
+    transform:translateY(35%);
+    transition:1s ease;
+
+    overflow:auto;
+}
+
+.envelope.open .flap{
+    transform:rotateX(180deg);
+}
+
+.envelope.open .letter-paper{
+    transform:translateY(-18%);
+}
+
+.letter-paper h2{
+    font-family:"Cormorant Garamond",serif;
+    font-size:42px;
+    margin-bottom:15px;
+    color:#9c698a;
+}
+
+.letter-paper p{
+    font-family:"Cormorant Garamond",serif;
+    font-size:21px;
+    line-height:1.65;
+    color:#695269;
+    white-space:pre-line;
+}
+
+.letter-sign{
+    margin-top:25px;
+    text-align:right;
+    font-family:"Cormorant Garamond",serif;
+    font-size:24px;
+    color:#a37497;
+}
+
+.letter-tip{
+    text-align:center;
+    margin-top:25px;
+    font-size:13px;
+    color:#9b8296;
+}
+
+.letter-next{
+    margin-top:35px;
+    text-align:center;
+}
+
+/* ===================================================
+   SCREEN 4 — CELEBRATION
+=================================================== */
+
+#celebration{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.celebration-card{
+    position:relative;
+    z-index:20;
+    width:min(850px,92%);
+    padding:55px 30px;
+    text-align:center;
+
+    background:rgba(255,255,255,.58);
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.8);
+
+    border-radius:40px;
+
+    box-shadow:
+        0 25px 70px rgba(90,65,95,.12);
+}
+
+.cake{
+    font-size:80px;
+    animation:cakeFloat 2.3s ease-in-out infinite;
+}
+
+@keyframes cakeFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+}
+
+.celebration-card h2{
+    margin:15px 0;
+    font-family:"Cormorant Garamond",serif;
+    font-size:clamp(50px,9vw,80px);
+}
+
+.celebration-card p{
+    max-width:600px;
+    margin:auto;
+    line-height:1.9;
+    color:#786578;
+}
+
+.birthday-name{
+    color:#d9689e;
+    font-weight:600;
+}
+
+/* ===================================================
+   CONFETTI
+=================================================== */
+
+.confetti{
+    position:fixed;
+    width:10px;
+    height:15px;
+    z-index:999;
+    pointer-events:none;
+
+    animation:
+        confettiFall 3s linear forwards;
+}
+
+@keyframes confettiFall{
+    from{
+        transform:
+            translateY(-20px)
+            rotate(0deg);
+        opacity:1;
+    }
+
+    to{
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+        opacity:0;
+    }
+}
+
+/* ===================================================
+   FLOATING HEARTS
+=================================================== */
+
+.heart{
+    position:fixed;
+    z-index:998;
+    pointer-events:none;
+    animation:
+        heartRise 4s ease-out forwards;
+}
+
+@keyframes heartRise{
+    from{
+        opacity:0;
+        transform:translateY(0) scale(.5);
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    to{
+        opacity:0;
+        transform:
+            translateY(-350px)
+            scale(1.3)
+            rotate(20deg);
+    }
+}
+
+/* ===================================================
+   MUSIC BUTTON
+=================================================== */
+
+.music{
+    position:fixed;
+    z-index:100;
+    right:20px;
+    top:20px;
+
+    width:48px;
+    height:48px;
+
+    border:0;
+    border-radius:50%;
+
+    background:rgba(255,255,255,.65);
+    backdrop-filter:blur(15px);
+
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 25px rgba(80,60,80,.1);
+
+    font-size:20px;
+}
+
+/* ===================================================
+   RESPONSIVE
+=================================================== */
+
+@media(max-width:850px){
+
+    .flower-grid{
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+    .flower-card:nth-child(4),
+    .flower-card:nth-child(5){
+        transform:translateX(50%);
+    }
+
+}
+
+@media(max-width:600px){
+
+    .opening-card{
+        padding:45px 20px;
+        border-radius:30px;
+    }
+
+    .opening-card .intro{
+        font-size:14px;
+    }
+
+    .flower-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+        gap:15px;
+    }
+
+    .flower-card{
+        min-height:195px;
+    }
+
+    .flower{
+        transform:scale(.8);
+    }
+
+    .flower-card:nth-child(4),
+    .flower-card:nth-child(5){
+        transform:none;
+    }
+
+    .letter-wrapper{
+        transform:scale(.95);
+    }
+
+    .letter-paper{
+        padding:25px;
+    }
+
+    .letter-paper h2{
+        font-size:34px;
+    }
+
+    .letter-paper p{
+        font-size:18px;
+    }
+
+    .envelope{
+        height:380px;
+    }
+}
+
+/* ===================================================
+   SCREEN 3 — ENVELOPE
+=================================================== */
+
+#letter{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:30px;
+}
+
+.letter-wrapper{
+    position:relative;
+    width:min(760px,92%);
+}
+
+/* AMPLop */
+.envelope{
+    position:relative;
+    width:100%;
+    height:430px;
+
+    perspective:1200px;
+
+    cursor:pointer;
+
+    filter:
+        drop-shadow(0 25px 45px rgba(100,70,100,.18));
+}
+
+/* BAGIAN BADAN AMPLOP */
+.envelope-body{
+    position:absolute;
+    left:0;
+    bottom:0;
+
+    width:100%;
+    height:70%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f4c9dc,
+            #ead2ef
+        );
+
+    border-radius:0 0 22px 22px;
+
+    overflow:hidden;
+
+    z-index:4;
+}
+
+/* Lipatan kiri */
+.envelope-body::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:#ecc9dc;
+
+    clip-path:
+        polygon(
+            0 0,
+            50% 55%,
+            0 100%
+        );
+}
+
+/* Lipatan kanan */
+.envelope-body::after{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:#e5c8e5;
+
+    clip-path:
+        polygon(
+            100% 0,
+            50% 55%,
+            100% 100%
+        );
+}
+
+/* =========================================
+   SURAT
+========================================= */
+
+.letter-paper{
+    position:absolute;
+
+    left:7%;
+    width:86%;
+
+    height:88%;
+
+    bottom:2%;
+
+    padding:35px 38px;
+
+    background:#fffdf8;
+
+    border-radius:12px;
+
+    box-shadow:
+        0 15px 40px rgba(80,55,75,.15);
+
+    z-index:2;
+
+    /*
+       SURAT BENAR-BENAR TERSEMBUNYI
+       DI DALAM AMPLOP
+    */
+
+    transform:
+        translateY(48%)
+        scale(.97);
+
+    opacity:0;
+
+    transition:
+        transform 1.4s cubic-bezier(.22,1,.36,1),
+        opacity .5s ease;
+
+    overflow-y:auto;
+
+    pointer-events:none;
+}
+
+/* =========================================
+   SAMPUL ATAS
+========================================= */
+
+.flap{
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:63%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f6cfe1,
+            #ecd2ef
+        );
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 100%
+        );
+
+    transform-origin:top center;
+
+    transition:
+        transform 1s cubic-bezier(.22,1,.36,1);
+
+    z-index:7;
+}
+
+/* garis dekorasi sampul */
+.flap::after{
+    content:"🌸";
+
+    position:absolute;
+
+    left:50%;
+    top:25%;
+
+    transform:
+        translate(-50%,-50%);
+
+    font-size:42px;
+
+    filter:
+        drop-shadow(
+            0 4px 8px rgba(150,80,120,.15)
+        );
+}
+
+/* =========================================
+   TULISAN PADA AMPLOP
+========================================= */
+
+.envelope-label{
+    position:absolute;
+
+    z-index:8;
+
+    left:50%;
+    top:46%;
+
+    transform:
+        translate(-50%,-50%);
+
+    text-align:center;
+
+    color:#986887;
+
+    transition:
+        opacity .4s ease;
+
+    pointer-events:none;
+}
+
+.envelope-label h3{
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:34px;
+
+    margin-bottom:4px;
+}
+
+.envelope-label span{
+    font-size:12px;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+
+    color:#aa8aa4;
+}
+
+/* =========================================
+   STATE OPEN
+========================================= */
+
+/* Sampul membuka */
+.envelope.open .flap{
+    transform:
+        rotateX(180deg);
+}
+
+/* Label menghilang */
+.envelope.open .envelope-label{
+    opacity:0;
+}
+
+/* Surat keluar dari amplop */
+.envelope.open .letter-paper{
+    transform:
+        translateY(-27%)
+        scale(1);
+
+    opacity:1;
+
+    z-index:6;
+
+    pointer-events:auto;
+
+    transition-delay:.65s;
+}
+
+/* =========================================
+   ISI SURAT
+========================================= */
+
+.letter-paper h2{
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:42px;
+
+    margin-bottom:18px;
+
+    color:#9c698a;
+
+    text-align:center;
+}
+
+.letter-paper p{
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:21px;
+
+    line-height:1.65;
+
+    color:#695269;
+
+    white-space:pre-line;
+}
+
+.letter-sign{
+    margin-top:25px;
+
+    text-align:right;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:24px;
+
+    color:#a37497;
+}
+
+/* =========================================
+   PETUNJUK
+========================================= */
+
+.letter-tip{
+    text-align:center;
+
+    margin-top:22px;
+
+    font-size:13px;
+
+    color:#9b8296;
+
+    transition:
+        opacity .5s ease;
+}
+
+.envelope.open + .letter-tip{
+    opacity:0;
+    visibility:hidden;
+}
+
+/* =========================================
+   BUTTON NEXT
+========================================= */
+
+.letter-next{
+    margin-top:30px;
+
+    text-align:center;
+
+    opacity:0;
+    visibility:hidden;
+
+    transform:translateY(15px);
+
+    transition:
+        .6s ease;
+}
+
+.letter-next.show{
+    opacity:1;
+    visibility:visible;
+
+    transform:translateY(0);
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:600px){
+
+    .letter-wrapper{
+        width:94%;
+    }
+
+    .envelope{
+        height:380px;
+    }
+
+    .letter-paper{
+        padding:24px 22px;
+    }
+
+    .letter-paper h2{
+        font-size:34px;
+    }
+
+    .letter-paper p{
+        font-size:18px;
+        line-height:1.6;
+    }
+
+    .envelope-label h3{
+        font-size:28px;
+    }
+
+    .flap::after{
+        font-size:32px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ===================================================
+     MUSIC
+=================================================== -->
+
+<audio id="birthdayMusic" loop>
+    <source src="About You.mp3" type="audio/mpeg">
+</audio>
+
+<button
+    class="music"
+    id="musicButton"
+    onclick="toggleMusic()">
+    🎵
+</button>
+
+
+<!-- ===================================================
+     SCREEN 1 — OPENING
+=================================================== -->
+
+<section class="screen active" id="opening">
+
+    <div class="background">
+        <div class="glow one"></div>
+        <div class="glow two"></div>
+
+        <div class="petal" style="left:5%;background:#ff9cc4;animation-duration:7s;"></div>
+        <div class="petal" style="left:18%;background:#b397ee;animation-duration:9s;animation-delay:2s;"></div>
+        <div class="petal" style="left:35%;background:#ffb2d4;animation-duration:8s;"></div>
+        <div class="petal" style="left:55%;background:#92bcea;animation-duration:11s;animation-delay:1s;"></div>
+        <div class="petal" style="left:72%;background:#ef8ea9;animation-duration:9s;"></div>
+        <div class="petal" style="left:90%;background:#bd9bea;animation-duration:8s;animation-delay:3s;"></div>
+    </div>
+
+
+    <div class="opening-card">
+
+        <div class="vinca-symbol">
+            🌸
+        </div>
+
+        <div class="tiny-title">
+            A Little Something For You
+        </div>
+
+        <h1>
+            Happy Birthday
+        </h1>
+
+        <p class="intro">
+            Hari ini bukan hari biasa.
+            Hari ini adalah hari ketika dunia menjadi sedikit
+            lebih indah karena seseorang seperti kamu lahir. 🌷
+            <br>
+            janlup musik ditekan ya biar ngga boring walau cuma bentar 😁
+        </p>
+
+        <button
+            class="primary-btn enter-btn"
+            onclick="goToGarden()">
+
+            🌸 Enter The Garden
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================
+     SCREEN 2 — GARDEN
+=================================================== -->
+
+<section class="screen" id="garden">
+
+    <div class="background">
+
+        <div class="glow one"></div>
+        <div class="glow two"></div>
+
+        <div class="petal"
+             style="left:5%;background:#ff91c1;animation-duration:8s;"></div>
+
+        <div class="petal"
+             style="left:24%;background:#a889e9;animation-duration:10s;"></div>
+
+        <div class="petal"
+             style="left:46%;background:#ffadcf;animation-duration:7s;"></div>
+
+        <div class="petal"
+             style="left:68%;background:#91c3f0;animation-duration:11s;"></div>
+
+        <div class="petal"
+             style="left:87%;background:#ee8ba5;animation-duration:8s;"></div>
+
+    </div>
+
+
+    <div class="garden-content">
+
+        <div class="garden-heading">
+
+            <div class="mini">
+                Welcome To
+            </div>
+
+            <h2>
+                Your Little Garden 🌸
+            </h2>
+
+            <p>
+                Setiap bunga menyimpan sebuah pesan.
+                Coba sentuh bunga-bunga di bawah ini.
+            </p>
+
+        </div>
+
+
+        <div class="flower-grid">
+
+            <!-- FLOWER 1 -->
+
+            <div
+                class="flower-card"
+                onclick="showFlowerMessage(
+                'Kebahagiaan',
+                'Semoga kamu selalu punya alasan untuk tersenyum setiap hari. 💗'
+                )">
+
+                <div class="flower">
+
+                    <div class="petal-shape p1"></div>
+                    <div class="petal-shape p2"></div>
+                    <div class="petal-shape p3"></div>
+                    <div class="petal-shape p4"></div>
+                    <div class="petal-shape p5"></div>
+
+                    <div class="center"></div>
+
+                </div>
+
+                <h3>
+                    Kebahagiaan
+                </h3>
+
+                <span>
+                    Pink Vinca
+                </span>
+
+            </div>
+
+
+            <!-- FLOWER 2 -->
+
+            <div
+                class="flower-card"
+                onclick="showFlowerMessage(
+                'Harapan',
+                'Semoga semua impian yang kamu simpan perlahan menjadi nyata. ✨'
+                )">
+
+                <div class="flower">
+
+                    <div class="petal-shape p1"></div>
+                    <div class="petal-shape p2"></div>
+                    <div class="petal-shape p3"></div>
+                    <div class="petal-shape p4"></div>
+                    <div class="petal-shape p5"></div>
+
+                    <div class="center"></div>
+
+                </div>
+
+                <h3>
+                    Harapan
+                </h3>
+
+                <span>
+                    Purple Vinca
+                </span>
+
+            </div>
+
+
+            <!-- FLOWER 3 -->
+
+            <div
+                class="flower-card"
+                onclick="showFlowerMessage(
+                'Cinta',
+                'Semoga kamu selalu dikelilingi oleh orang-orang yang tulus menyayangimu. 💕'
+                )">
+
+                <div class="flower">
+
+                    <div class="petal-shape p1"></div>
+                    <div class="petal-shape p2"></div>
+                    <div class="petal-shape p3"></div>
+                    <div class="petal-shape p4"></div>
+                    <div class="petal-shape p5"></div>
+
+                    <div class="center"></div>
+
+                </div>
+
+                <h3>
+                    Cinta
+                </h3>
+
+                <span>
+                    Soft Vinca
+                </span>
+
+            </div>
+
+
+            <!-- FLOWER 4 -->
+
+            <div
+                class="flower-card"
+                onclick="showFlowerMessage(
+                'Mimpi',
+                'Teruslah melangkah menuju hal-hal besar yang kamu impikan. 🌷'
+                )">
+
+                <div class="flower">
+
+                    <div class="petal-shape p1"></div>
+                    <div class="petal-shape p2"></div>
+                    <div class="petal-shape p3"></div>
+                    <div class="petal-shape p4"></div>
+                    <div class="petal-shape p5"></div>
+
+                    <div class="center"></div>
+
+                </div>
+
+                <h3>
+                    Mimpi
+                </h3>
+
+                <span>
+                    Blue Vinca
+                </span>
+
+            </div>
+
+
+            <!-- FLOWER 5 -->
+
+            <div
+                class="flower-card"
+                onclick="showFlowerMessage(
+                'Masa Depan',
+                'Semoga perjalananmu ke depan penuh cerita indah yang tidak pernah kamu sangka. 🌼'
+                )">
+
+                <div class="flower">
+
+                    <div class="petal-shape p1"></div>
+                    <div class="petal-shape p2"></div>
+                    <div class="petal-shape p3"></div>
+                    <div class="petal-shape p4"></div>
+                    <div class="petal-shape p5"></div>
+
+                    <div class="center"></div>
+
+                </div>
+
+                <h3>
+                    Masa Depan
+                </h3>
+
+                <span>
+                    Rose Vinca
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="garden-message"
+            id="gardenMessage">
+
+            <h3 id="flowerTitle">
+                🌸
+            </h3>
+
+            <p id="flowerText">
+                Klik sebuah bunga untuk melihat pesannya.
+            </p>
+
+        </div>
+
+
+        <div class="next-area">
+
+            <button
+                class="primary-btn"
+                onclick="goToLetter()">
+
+                💌 Ada Sesuatu Untukmu
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================
+     SCREEN 3 — LETTER
+=================================================== -->
+
+<section class="screen" id="letter">
+
+    <div class="background">
+
+        <div class="glow one"></div>
+        <div class="glow two"></div>
+
+        <div class="petal"
+             style="left:12%;background:#ff91be;animation-duration:8s;">
+        </div>
+
+        <div class="petal"
+             style="left:35%;background:#aa91e8;animation-duration:10s;">
+        </div>
+
+        <div class="petal"
+             style="left:65%;background:#8db8ea;animation-duration:7s;">
+        </div>
+
+        <div class="petal"
+             style="left:85%;background:#f090aa;animation-duration:9s;">
+        </div>
+
+    </div>
+
+
+    <div class="letter-wrapper">
+
+        <!-- AMPLOP -->
+
+        <div
+            class="envelope"
+            id="envelope"
+            onclick="openLetter()">
+
+            <!-- SURAT ADA DI DALAM -->
+            <div class="letter-paper">
+
+                <h2>
+                    For You 🌸
+                </h2>
+            <div class="memory-gallery">
+
+                <img src="IMG 2.jpg" alt="Kenangan 1">
+                <img src="IMG 6.jpeg" alt="Kenangan 2">
+                <img src="IMG 3.jpg" alt="Kenangan 3">
+
+            </div>
+
+                <p id="letterText">
+Selamat ulang tahuunn untuk dee vincaa 🥳🥳
+
+Hari ini tentunya hari yang spesial,
+bukan hanya karena bertambahnya usia,
+tetapi berkembangnya diri kamu sekarang.
+Apalagi tidak menyerah untuk berhenti ditengah jalan😃👍🏼
+
+Semoga tahun ini membawa
+lebih banyak kebahagiaan,
+senyum, semangat, dan keberanian 
+untuk mengejar mimpi,
+dan lebih banyak hal kecil
+yang membuat hatimu terus senang.
+
+Semoga semua hal baik yang kamu
+lakukan membantu mempermudah jalan kamu.
+
+Dan ketika hidup terasa berat,
+semoga kamu selalu ingat
+bahwa kamu jauh lebih kuat
+dari yang kamu kira.
+
+Tetaplah menjadi dirimu sendiri.
+Tetaplah bersinar dengan caramu sendiri.
+
+Karena seperti bunga Vinca,
+kamu tidak perlu menjadi bunga lain
+untuk terlihat indah.
+
+Happy Birthdaayy. 
+
+Semoga hari ini,
+besok,
+dan hari-hari setelahnya
+selalu membawa cerita indah untukmu.
+                </p>
+
+                <div class="letter-sign">
+                    With Heart,
+                    <br>
+                    Someone who wishes you well
+                    <br>
+                    FAZ
+                 </div>
+
+            </div>
+
+
+            <!-- BADAN AMPLOP -->
+
+            <div class="envelope-body"></div>
+
+
+            <!-- SAMPUL ATAS -->
+
+            <div class="flap"></div>
+
+
+            <!-- TULISAN DEPAN AMPLOP -->
+
+            <div class="envelope-label">
+
+                <h3>
+                    For Someone Special
+                </h3>
+
+                <span>
+                    Open Me 🌸
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- PETUNJUK -->
+
+        <div class="letter-tip">
+            💌 Tekan sampul untuk membuka surat
+        </div>
+
+
+        <!-- TOMBOL LANJUT -->
+
+        <div
+            class="letter-next"
+            id="letterNext">
+
+            <button
+                class="primary-btn"
+                onclick="goToCelebration()">
+
+                🎂 One Last Surprise
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================
+     SCREEN 4 — CELEBRATION
+=================================================== -->
+
+<section class="screen" id="celebration">
+
+    <div class="background">
+
+        <div class="glow one"></div>
+        <div class="glow two"></div>
+
+        <div class="petal"
+             style="left:5%;background:#ff88b8;animation-duration:7s;"></div>
+
+        <div class="petal"
+             style="left:20%;background:#9f84e3;animation-duration:9s;"></div>
+
+        <div class="petal"
+             style="left:40%;background:#ffb4d0;animation-duration:8s;"></div>
+
+        <div class="petal"
+             style="left:60%;background:#8ebbed;animation-duration:10s;"></div>
+
+        <div class="petal"
+             style="left:80%;background:#ef8da9;animation-duration:7s;"></div>
+
+    </div>
+
+
+    <div class="celebration-card">
+
+        <div class="cake">
+            🎂
+        </div>
+
+        <h2>
+            Happy Birthday,
+            <span class="birthday-name">
+                Vinca
+            </span>
+            🌸
+        </h2>
+
+        <p>
+            Semoga tahun selanjutnya dalam hidupmu
+            dipenuhi bunga-bunga kebahagiaan,
+            warna-warna indah,
+            dan kejutan-kejutan kecil
+            yang membuatmu tersenyum.
+
+            <br><br>
+
+            Jangan pernah berhenti bermimpi.
+            Jangan pernah berhenti menjadi dirimu sendiri.
+
+            <br><br>
+
+            Karena dunia terasa sedikit lebih indah
+            ketika kamu terus tersenyum. 💗
+        </p>
+
+        <br>
+
+        <button
+            class="primary-btn"
+            onclick="celebrate()">
+
+            🎉 Make A Wish
+
+        </button>
+
+        <br><br>
+
+        <button
+            class="primary-btn secondary-btn"
+            onclick="backToBeginning()">
+
+            🌸 Replay
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* ===================================================
+   NAVIGATION
+=================================================== */
+
+function showScreen(id){
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(screen => {
+            screen.classList.remove("active");
+        });
+
+    document
+        .getElementById(id)
+        .classList.add("active");
+}
+
+
+function goToGarden(){
+
+    showScreen("garden");
+
+    burstHearts(8);
+}
+
+
+function goToLetter(){
+
+    showScreen("letter");
+
+    burstHearts(6);
+}
+
+
+function goToCelebration(){
+
+    showScreen("celebration");
+
+    setTimeout(() => {
+
+        celebrate();
+
+    },500);
+}
+
+
+function backToBeginning(){
+
+    showScreen("opening");
+
+}
+
+
+/* ===================================================
+   FLOWER MESSAGE
+=================================================== */
+
+function showFlowerMessage(title,text){
+
+    const box =
+        document.getElementById("gardenMessage");
+
+    const titleElement =
+        document.getElementById("flowerTitle");
+
+    const textElement =
+        document.getElementById("flowerText");
+
+    titleElement.innerHTML =
+        "🌸 " + title;
+
+    textElement.innerHTML =
+        text;
+
+    box.classList.remove("show");
+
+    void box.offsetWidth;
+
+    box.classList.add("show");
+
+    burstHearts(3);
+}
+
+
+/* ===================================================
+   LETTER
+=================================================== */
+
+function openLetter(){
+
+    const envelope =
+        document.getElementById("envelope");
+
+    const nextButton =
+        document.getElementById("letterNext");
+
+    // Jangan tutup kembali setelah surat dibuka
+    if(envelope.classList.contains("open")){
+        return;
+    }
+
+    // Buka sampul
+    envelope.classList.add("open");
+
+    // Efek hati kecil
+    burstHearts(5);
+
+    // Setelah surat selesai keluar
+    setTimeout(() => {
+
+        nextButton.classList.add("show");
+
+    }, 2200);
+}
+
+/* ===================================================
+   MUSIC
+=================================================== */
+
+const music =
+    document.getElementById("birthdayMusic");
+
+const musicButton =
+    document.getElementById("musicButton");
+
+let musicPlaying = false;
+
+
+function toggleMusic(){
+
+    if(!music.querySelector("source")){
+
+        alert(
+            "Tambahkan file musik terlebih dahulu.\n\n" +
+            "Contoh:\n" +
+            "<source src=\"music.mp3\" type=\"audio/mpeg\">"
+        );
+
+        return;
+    }
+
+    if(musicPlaying){
+
+        music.pause();
+
+        musicButton.innerHTML =
+            "🎵";
+
+        musicPlaying = false;
+
+    }else{
+
+        music.play();
+
+        musicButton.innerHTML =
+            "🔊";
+
+        musicPlaying = true;
+    }
+}
+
+
+/* ===================================================
+   HEARTS
+=================================================== */
+
+function burstHearts(amount){
+
+    const symbols=[
+        "💗",
+        "💕",
+        "💖",
+        "🌸",
+        "🌷",
+        "✨"
+    ];
+
+    for(let i=0;i<amount;i++){
+
+        const heart =
+            document.createElement("div");
+
+        heart.className =
+            "heart";
+
+        heart.innerHTML =
+            symbols[
+                Math.floor(
+                    Math.random()*symbols.length
+                )
+            ];
+
+        heart.style.left =
+            Math.random()*100+"vw";
+
+        heart.style.bottom =
+            Math.random()*30+"vh";
+
+        heart.style.fontSize =
+            (18+Math.random()*20)+"px";
+
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{
+            heart.remove();
+        },4000);
+    }
+}
+
+
+/* ===================================================
+   CONFETTI
+=================================================== */
+
+function celebrate(){
+
+    const colors=[
+        "#ff87b8",
+        "#a88be7",
+        "#8ebbea",
+        "#ffd45b",
+        "#ff9cae",
+        "#ffffff"
+    ];
+
+    for(let i=0;i<100;i++){
+
+        const piece =
+            document.createElement("div");
+
+        piece.className =
+            "confetti";
+
+        piece.style.left =
+            Math.random()*100+"vw";
+
+        piece.style.background =
+            colors[
+                Math.floor(
+                    Math.random()*colors.length
+                )
+            ];
+
+        piece.style.animationDuration =
+            (2+Math.random()*2.5)+"s";
+
+        piece.style.animationDelay =
+            (Math.random()*1)+"s";
+
+        piece.style.width =
+            (5+Math.random()*8)+"px";
+
+        piece.style.height =
+            (8+Math.random()*14)+"px";
+
+        document.body.appendChild(piece);
+
+        setTimeout(()=>{
+            piece.remove();
+        },4500);
+    }
+
+    burstHearts(25);
+}
+
+
+/* ===================================================
+   KEYBOARD SHORTCUTS
+=================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            backToBeginning();
+
+        }
+
+    }
+);
+
+
+/* ===================================================
+   AUTO FLOATING HEARTS
+=================================================== */
+
+setInterval(()=>{
+
+    if(
+        document
+        .getElementById("celebration")
+        .classList
+        .contains("active")
+    ){
+
+        burstHearts(2);
+
+    }
+
+},2500);
+
+</script>
+
+</body>
+</html>
